@@ -1,0 +1,41 @@
+
+<!--タイトル-->
+  <div class="interval">
+    <h1>Editing Book</h1>
+  </div>
+
+<!--エラー表示-->
+        <% if @book.errors.any? %>
+        <%= @book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+        <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+        <% end %>
+    </ul>
+        <% end %>
+
+
+        <%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
+
+<!--タイトル表示-->
+    <div class="field">
+       <%= f.label :title %>
+       <%= f.text_field :title %>
+  </div>
+
+<!--ボディ表示-->
+    <div class="field">
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+    </div>
+
+<!--ボタン表示-->
+<div class="interval">
+    <div class="button"><%= f.submit 'Update Book' %></div>
+  </div>
+<!--リンク表示-->
+    <a href="/books/<%= @book.id %>">Show</a>
+     |
+    <a href="/books">Back</a>
+
+          <% end %>
